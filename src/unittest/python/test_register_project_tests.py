@@ -13,7 +13,10 @@ from freezegun import freeze_time
 def create_temp_json(file_name, content):
     file_path = os.path.join("src/unittest/python", file_name)
 
-    content = json.loads(content)
+    if not content:
+        return file_path
+    else:
+        content = json.loads(content)
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(content, f, indent=4)

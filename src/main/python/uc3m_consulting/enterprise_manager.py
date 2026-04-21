@@ -27,12 +27,11 @@ class EnterpriseManager:
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        except EnterpriseManagementException:
+        except Exception:
             raise EnterpriseManagementException("Invalid JSON file")
 
         file_name = data.get("FILENAME")
         name_without_ext = os.path.splitext(file_name)[0]
-        ext = os.path.splitext(file_name)[1]
 
         if not re.fullmatch(r"[A-Za-z0-9]{8}", name_without_ext):
             raise EnterpriseManagementException("Invalid file name")
