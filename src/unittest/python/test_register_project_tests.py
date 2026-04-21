@@ -2,10 +2,12 @@
 import unittest
 import os
 import json
+import freezegun
 
 from openpyxl import load_workbook
 from uc3m_consulting.enterprise_manager import EnterpriseManager
 from uc3m_consulting.enterprise_management_exception import EnterpriseManagementException
+from freezegun import freeze_time
 
 
 def create_temp_json(file_name, content):
@@ -32,6 +34,7 @@ class MyTestCase(unittest.TestCase):
         cls.headers = [cell.value for cell in sheet[1]]
         cls.rows = list(sheet.iter_rows(min_row=2, values_only=True))
 
+    @freeze_time("2026/01/01")
     def test_cases_from_excel(self):
         for row in self.rows:
             row_dict = dict(zip(self.headers, row))
