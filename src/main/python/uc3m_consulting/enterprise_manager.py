@@ -16,10 +16,10 @@ class EnterpriseManager:
         OR FALSE IN OTHER CASE"""
         return True
 
-    def register_document(self, file_path):
-        if not os.path.exists(file_path):
-            raise EnterpriseManagementException("Input file not found")
-
-        doc = ProjectDocument(file_path)
-
-        return doc.document_signature
+    # def register_document(self, file_path):
+    #     if not os.path.exists(file_path):
+    #         raise EnterpriseManagementException("Input file not found")
+    #
+    #     doc = ProjectDocument(file_path)
+    #
+    #     return doc.document_signature
