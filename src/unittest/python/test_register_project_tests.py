@@ -2,7 +2,6 @@
 import unittest
 import os
 import json
-import freezegun
 
 from openpyxl import load_workbook
 from uc3m_consulting.enterprise_manager import EnterpriseManager
@@ -38,7 +37,7 @@ class MyTestCase(unittest.TestCase):
         cls.rows = list(sheet.iter_rows(min_row=2, values_only=True))
 
     @freeze_time("2026/01/01")
-    def test_cases_from_excel(self):
+    def test_cases_from_xlsx(self):
         for row in self.rows:
             row_dict = dict(zip(self.headers, row))
 

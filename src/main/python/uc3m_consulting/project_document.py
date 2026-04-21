@@ -22,11 +22,14 @@ class ProjectDocument():
                 "register_date": self.__register_date,
                 "document_signature": self.document_signature}
 
+    #signature has been changed based on EG2B requirement where
+    # register date is not part of signature calculation
     def __signature_string(self):
         """Composes the string to be used for generating the key for the date"""
-        return "{alg:" + str(self.__alg) +",typ:" + str(self.__type) +",project_id:" + \
+        return ("{alg:" + str(self.__alg) +",typ:" + str(self.__type) +",project_id:" + \
                str(self.__project_id) + ",file_name:" + str(self.__file_name) + \
-               ",register_date:" + str(self.__register_date) + "}"
+               """"" "",register_date:" + str(self.__register_date)  """
+                + "}")
 
     @property
     def project_id(self):
