@@ -20,7 +20,7 @@ def create_temp_json(file_name, content):
 
 class MyTestCase(unittest.TestCase):
     """class for testing the register_order method"""
-
+    @classmethod
     def setUpClass(cls):
         cls.mngr = EnterpriseManager()
 
