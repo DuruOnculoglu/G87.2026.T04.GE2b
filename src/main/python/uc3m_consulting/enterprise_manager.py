@@ -22,23 +22,24 @@ class EnterpriseManager:
 
     def register_document(self, file_path):
         if not os.path.exists(file_path):
-            raise EnterpriseManagementException("Input file not found")
+            raise EnterpriseManagementException("Input file not found.")
 
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        except Exception:
-            raise EnterpriseManagementException("Invalid JSON file")
+        except EnterpriseManagementException:
+            raise EnterpriseManagementException("This file is not JSON formatted.")
 
         file_name = data.get("FILENAME")
         name_without_ext = os.path.splitext(file_name)[0]
+        ext = os.path.splitext(file_name)[1]
 
         if not re.fullmatch(r"[A-Za-z0-9]{8}", name_without_ext):
-            raise EnterpriseManagementException("Invalid file name")
+            raise EnterpriseManagementException("JSON data has no valid values.")
 
         project_id = data.get("PROJECT_ID")
         if project_id is None:
-            raise EnterpriseManagementException("Invalid JSON file")
+            raise EnterpriseManagementException("JSON data has no valid values.")
 
         # expected_md5 = hashlib.md5(name_without_ext.encode()).hexdigest()
         # if project_id != expected_md5:
@@ -47,10 +48,10 @@ class EnterpriseManager:
         project = ProjectDocument(data.get("PROJECT_ID"), data.get("FILENAME"))
 
 
-        # Path to the storage file
+        # Storage file path
         storage_file = "src/main/python/uc3m_consulting/" + "all_documents.json"
 
-        # Step 1: Load existing documents (if file exists)
+        # Load existing documents if file exists
         if os.path.exists(storage_file):
             with open(storage_file, "r", encoding="utf-8") as f:
                 try:
@@ -60,10 +61,9 @@ class EnterpriseManager:
         else:
             documents = []
 
-        # Step 2: Append the new document
         documents.append(project.to_json())
 
-        # Step 3: Save back to file
+        # Save back to file
         with open(storage_file, "w", encoding="utf-8") as f:
             json.dump(documents, f, indent=4)
 
