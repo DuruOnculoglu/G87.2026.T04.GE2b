@@ -10,6 +10,9 @@ from freezegun import freeze_time
 
 
 def create_temp_json(file_name, content):
+    if not file_name:
+        raise ValueError("FILE PATH is missing in Excel test case")
+
     file_path = os.path.join("src/unittest/python", file_name)
 
     if not content:
@@ -45,10 +48,17 @@ class MyTestCase(unittest.TestCase):
     @freeze_time("2026/01/01")
     def test_cases_from_xlsx(self):
         for row in self.rows:
+            if all(cell is None for cell in row):
+                continue
+
             row_dict = dict(zip(self.headers, row))
 
             test_id = row_dict["ID TEST"]
             test_type = row_dict["TYPE (DUPLICATION / DELETION / MODIFICATION / VALID)"]
+            file_name = row_dict.get("FILE PATH")
+            if not file_name:
+                raise ValueError(f"Test {test_id}: FILE PATH is missing")
+
             file_path = create_temp_json(
                 row_dict["FILE PATH"],
                 row_dict["FILE CONTENT"])
