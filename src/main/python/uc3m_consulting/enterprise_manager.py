@@ -30,6 +30,7 @@ class EnterpriseManager:
         except EnterpriseManagementException:
             raise EnterpriseManagementException("This file is not JSON formatted.")
 
+
         file_name = data.get("FILENAME")
         name_without_ext = os.path.splitext(file_name)[0]
         ext = os.path.splitext(file_name)[1]
@@ -41,12 +42,28 @@ class EnterpriseManager:
         if project_id is None:
             raise EnterpriseManagementException("JSON data has no valid values.")
 
+        if not re.fullmatch(r"[0-9a-fA-F]{32}", project_id):
+            raise EnterpriseManagementException("JSON data has no valid values.")
+
+        if ext not in [".pdf", ".docx", ".xlsx"]:
+            raise EnterpriseManagementException("JSON data has no valid values.")
+
+        if "PROJECT_ID" not in data or "FILENAME" not in data:
+            raise EnterpriseManagementException("JSON does not have the expected structure.")
+
+        if not isinstance(project_id, str) or not isinstance(file_name, str):
+            raise EnterpriseManagementException("JSON does not have the expected structure.")
+
+
         # expected_md5 = hashlib.md5(name_without_ext.encode()).hexdigest()
         # if project_id != expected_md5:
         #     raise EnterpriseManagementException("Invalid project ID")
 
-        project = ProjectDocument(data.get("PROJECT_ID"), data.get("FILENAME"))
-
+        try:
+            project = ProjectDocument(project_id, file_name)
+        except Exception:
+            raise EnterpriseManagementException(
+                "Internal processing error when getting the file_signature.")
 
         # Storage file path
         storage_file = "src/main/python/uc3m_consulting/" + "all_documents.json"
