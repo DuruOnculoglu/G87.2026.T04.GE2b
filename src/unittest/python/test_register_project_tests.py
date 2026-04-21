@@ -20,24 +20,19 @@ def create_temp_json(file_name, content):
 
 class MyTestCase(unittest.TestCase):
     """class for testing the register_order method"""
-    def test_something( self ):
-        """dummy test"""
-        self.assertEqual(True, True)
 
-    def test_valid_cases_from_excel(self):
+    def setUpClass(cls):
+        cls.mngr = EnterpriseManager()
 
-        excel_file = "docs/GE2ExcelTestFile.xlsx"
-
-        wb = load_workbook(excel_file)
+        wb = load_workbook("docs/GE2ExcelTestFile.xlsx")
         sheet = wb.active
 
-        headers = [cell.value for cell in sheet[1]]
+        cls.headers = [cell.value for cell in sheet[1]]
+        cls.rows = list(sheet.iter_rows(min_row=2, values_only=True))
 
-        mngr = EnterpriseManager()
-
-        for row in sheet.iter_rows(min_row=2, values_only=True):
-
-            row_dict = dict(zip(headers, row))
+    def test_valid_cases_from_excel(self):
+        for row in self.rows:
+            row_dict = dict(zip(self.headers, row))
 
             test_id = row_dict["ID TEST"]
             test_type = row_dict["TYPE (DUPLICATION / DELETION / MODIFICATION / VALID)"]
@@ -48,29 +43,18 @@ class MyTestCase(unittest.TestCase):
 
             if test_type == "VALID":
                 with self.subTest(test_id=test_id):
-                    result = mngr.register_document(file_path)
-                    self.assertEqual(expected, result)
+                    result = self.mngr.register_document(file_path)
 
-            break  # stops after first row
+            self.assertEqual(expected, result)
+
+            self.addCleanup(lambda p=file_path: os.remove(p) if os.path.exists(p) else None)
 
     def test_invalid_cases_from_excel(self):
-
-        excel_file = "docs/Syntax Analysis Tree.pdf"
-
-        wb = load_workbook(excel_file)
-        sheet = wb.active
-
-        headers = [cell.value for cell in sheet[1]]
-
-        mngr = EnterpriseManager()
-
-        for row in sheet.iter_rows(min_row=2, values_only=True):
-
-            row_dict = dict(zip(headers, row))
-
+        for row in self.rows:
+            row_dict = dict(zip(self.headers, row))
             test_id = row_dict["ID TEST"]
-
             content = row_dict["FILE CONTENT"]
+
             if isinstance(content, str):
                 content = json.loads(content)
 
@@ -81,11 +65,16 @@ class MyTestCase(unittest.TestCase):
             with self.subTest(test_id=test_id):
 
                 with self.assertRaises(EnterpriseManagementException) as context:
-                    mngr.register_document(file_path)
+                    self.mngr.register_document(file_path)
 
                 actual_message = str(context.exception)
 
                 self.assertEqual(expected_message, actual_message)
+
+                self.addCleanup(lambda p=file_path: os.remove(p) if os.path.exists(p) else None)
+
+                def tearDown(self):
+                    pass
 
 if __name__ == '__main__':
     unittest.main()
