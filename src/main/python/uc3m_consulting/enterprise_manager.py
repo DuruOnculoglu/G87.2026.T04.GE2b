@@ -22,24 +22,24 @@ class EnterpriseManager:
 
     def register_document(self, file_path):
         if not os.path.exists(file_path):
-            raise EnterpriseManagementException("Input file not found")
+            raise EnterpriseManagementException("Input file not found.")
 
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
         except EnterpriseManagementException:
-            raise EnterpriseManagementException("Invalid JSON file")
+            raise EnterpriseManagementException("This file is not JSON formatted.")
 
         file_name = data.get("FILENAME")
         name_without_ext = os.path.splitext(file_name)[0]
         ext = os.path.splitext(file_name)[1]
 
         if not re.fullmatch(r"[A-Za-z0-9]{8}", name_without_ext):
-            raise EnterpriseManagementException("Invalid file name")
+            raise EnterpriseManagementException("JSON data has no valid values.")
 
         project_id = data.get("PROJECT_ID")
         if project_id is None:
-            raise EnterpriseManagementException("Invalid JSON file")
+            raise EnterpriseManagementException("JSON data has no valid values.")
 
         # expected_md5 = hashlib.md5(name_without_ext.encode()).hexdigest()
         # if project_id != expected_md5:
