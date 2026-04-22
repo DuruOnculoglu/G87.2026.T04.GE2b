@@ -139,7 +139,7 @@ class EnterpriseManager:
                 try:
                     documents = json.load(f)
                 except Exception:
-                    documents = []  # corrupted file → start fresh
+                    documents = []
         else:
             documents = []
 

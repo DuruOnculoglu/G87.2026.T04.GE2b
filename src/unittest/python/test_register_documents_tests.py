@@ -78,6 +78,29 @@ class MyTestCase(unittest.TestCase):
                     actual_message = str(context.exception)
                     self.assertEqual(expected_message, actual_message)
 
+    # def test_case_76(self):
+    #     """ This test case tests the internal processing error"""
+    #     valid_data = ' {"PROJECT_ID":"00112233445566778899AaBbCcDdEeFf","FILENAME":"File1357.pdf"} '
+    #     expected_message = "Internal processing error when getting the file_signature."
+    #
+    #     test_file = create_temp_json("test76.json", valid_data)
+    #
+    #     storage_file = "src/main/python/uc3m_consulting/all_documents.json"
+    #
+    #     if os.path.exists(storage_file):
+    #         os.remove(storage_file)
+    #
+    #     self.mngr.project_id = "INVALID"
+    #
+    #     try:
+    #         with self.assertRaises(EnterpriseManagementException) as context:
+    #             self.mngr.register_document(test_file)
+    #         self.assertEqual(expected_message, str(context.exception))
+    #
+    #     finally:
+    #         if os.path.exists(storage_file):
+    #             os.remove(storage_file)
+
     def tearDown(self):
          pass
 
