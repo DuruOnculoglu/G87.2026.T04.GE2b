@@ -76,6 +76,23 @@ class EnterpriseManager:
         except ValueError as exc:
             raise EnterpriseManagementException("Invalid Budget") from exc
 
+        storage_file = "corporate_operations.json"
+
+        if os.path.exists(storage_file):
+            with open(storage_file, "r", encoding="utf-8") as file:
+                try:
+                    projects = json.load(file)
+                    if not isinstance(projects, list):
+                        projects = []
+                except Exception:
+                    projects = []
+        else:
+            projects = []
+
+        for p in projects:
+            if p.get("company_cif") == company_cif and p.get("project_achronym") == project_achronym:
+                raise EnterpriseManagementException("Project already exists for this CIF")
+
         obj_project = EnterpriseProject(company_cif, project_achronym, project_description,
                                        department, date, budget)
         try:
@@ -83,9 +100,11 @@ class EnterpriseManager:
         except Exception as exc:
             raise EnterpriseManagementException("MD5 String Error") from exc
 
+        projects.append(obj_project.to_json())
+
         try:
-            with open("corporate_operations.json", "w", encoding= "utf-8") as file:
-                json.dump(obj_project.to_json(), file, indent=4)
+            with open(storage_file, "w", encoding="utf-8") as file:
+                json.dump(projects, file, indent=4)
         except OSError as exc:
             raise EnterpriseManagementException("Error Writing to JSON File") from exc
 
@@ -122,6 +141,22 @@ class EnterpriseManager:
         if not re.fullmatch(r"[0-9a-fA-F]{32}", project_id):
             raise EnterpriseManagementException("JSON data has no valid values.")
         if ext not in [".pdf", ".docx", ".xlsx"]:
+            raise EnterpriseManagementException("JSON data has no valid values.")
+
+        # Validate PROJECT_ID exists in registered projects
+        corp_file = "corporate_operations.json"
+        if not os.path.exists(corp_file):
+            raise EnterpriseManagementException("JSON data has no valid values.")
+
+        with open(corp_file, "r", encoding="utf-8") as f:
+            try:
+                projects = json.load(f)
+                if not isinstance(projects, list):
+                    projects = []
+            except Exception:
+                raise EnterpriseManagementException("JSON data has no valid values.")
+
+        if not any(p.get("project_id") == project_id for p in projects):
             raise EnterpriseManagementException("JSON data has no valid values.")
 
         try:
