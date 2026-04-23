@@ -54,7 +54,7 @@ class MyTestCase(unittest.TestCase):
             row_dict = dict(zip(self.headers, row))
 
             test_id = row_dict["ID TEST"]
-            test_type = row_dict["TYPE (DUPLICATION / DELETION / MODIFICATION / VALID)"]
+            test_type = row_dict["TYPE"]
             file_name = row_dict.get("FILE PATH")
             if not file_name:
                 raise ValueError(f"Test {test_id}: FILE PATH is missing")
