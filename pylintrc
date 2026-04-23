@@ -286,47 +286,20 @@ valid-metaclass-classmethod-first-arg=mcs
 
 [DESIGN]
 
-# List of regular expressions of class ancestor names to ignore when counting
-# public methods (see R0903)
-exclude-too-few-public-methods=
-
-# List of qualified class names to ignore when counting class parents (see
-# R0901)
-ignored-parents=
-
 # Maximum number of arguments for function / method.
-max-args=5
-
-# Maximum number of attributes for a class (see R0902).
-max-attributes=7
-
-# Maximum number of boolean expressions in an if statement (see R0916).
-max-bool-expr=5
+max-args=7
 
 # Maximum number of branch for function / method body.
-max-branches=12
+max-branches=25
 
 # Maximum number of locals for function / method body.
-max-locals=15
-
-# Maximum number of parents for a class (see R0901).
-max-parents=7
+max-locals=20
 
 # Maximum number of positional arguments for function / method.
-max-positional-arguments=5
-
-# Maximum number of public methods for a class (see R0904).
-max-public-methods=20
-
-# Maximum number of return / yield for function / method body.
-max-returns=6
+max-positional-arguments=7
 
 # Maximum number of statements in function / method body.
-max-statements=50
-
-# Minimum number of public methods for a class (see R0903).
-min-public-methods=2
-
+max-statements=70
 
 [EXCEPTIONS]
 

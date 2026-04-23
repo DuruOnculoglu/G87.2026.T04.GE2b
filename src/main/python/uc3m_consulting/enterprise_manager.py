@@ -84,7 +84,7 @@ class EnterpriseManager:
                     projects = json.load(file)
                     if not isinstance(projects, list):
                         projects = []
-                except Exception:
+                except json.JSONDecodeError:
                     projects = []
         else:
             projects = []
@@ -173,7 +173,7 @@ class EnterpriseManager:
             with open(storage_file, "r", encoding="utf-8") as f:
                 try:
                     documents = json.load(f)
-                except Exception:
+                except json.JSONDecodeError:
                     documents = []
         else:
             documents = []
