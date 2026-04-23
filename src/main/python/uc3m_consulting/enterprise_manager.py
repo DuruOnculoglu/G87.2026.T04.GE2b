@@ -143,7 +143,6 @@ class EnterpriseManager:
         if ext not in [".pdf", ".docx", ".xlsx"]:
             raise EnterpriseManagementException("JSON data has no valid values.")
 
-        # Validate PROJECT_ID exists in registered projects
         corp_file = "corporate_operations.json"
         if not os.path.exists(corp_file):
             raise EnterpriseManagementException("JSON data has no valid values.")
@@ -151,8 +150,6 @@ class EnterpriseManager:
         with open(corp_file, "r", encoding="utf-8") as f:
             try:
                 projects = json.load(f)
-                if not isinstance(projects, list):
-                    projects = []
             except Exception:
                 raise EnterpriseManagementException("JSON data has no valid values.")
 
