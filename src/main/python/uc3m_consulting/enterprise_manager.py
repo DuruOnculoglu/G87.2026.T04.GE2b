@@ -1,5 +1,5 @@
 """Module """
-import hashlib
+
 import os
 import json
 import re
@@ -90,7 +90,8 @@ class EnterpriseManager:
             projects = []
 
         for p in projects:
-            if p.get("company_cif") == company_cif and p.get("project_achronym") == project_achronym:
+            if (p.get("company_cif") == company_cif and
+                    p.get("project_achronym") == project_achronym):
                 raise EnterpriseManagementException("Project already exists for this CIF")
 
         obj_project = EnterpriseProject(company_cif, project_achronym, project_description,
@@ -111,14 +112,16 @@ class EnterpriseManager:
         return project_id
 
     def register_document(self, file_path):
+        """ This method registers a document based on the file path passed in."""
+
         if not os.path.exists(file_path):
             raise EnterpriseManagementException("Input file not found.")
 
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        except json.JSONDecodeError:
-            raise EnterpriseManagementException("This file is not JSON formatted.")
+        except json.JSONDecodeError as exc:
+            raise EnterpriseManagementException("This file is not JSON formatted.") from exc
 
 
         if not isinstance(data, dict):
@@ -150,17 +153,17 @@ class EnterpriseManager:
         with open(corp_file, "r", encoding="utf-8") as f:
             try:
                 projects = json.load(f)
-            except Exception:
-                raise EnterpriseManagementException("JSON data has no valid values.")
+            except Exception as exc:
+                raise EnterpriseManagementException("JSON data has no valid values.") from exc
 
         if not any(p.get("project_id") == project_id for p in projects):
             raise EnterpriseManagementException("JSON data has no valid values.")
 
         try:
             project = ProjectDocument(project_id, file_name)
-        except Exception:
+        except Exception as exc:
             raise EnterpriseManagementException(
-                "Internal processing error when getting the file_signature.")
+                "Internal processing error when getting the file_signature.") from exc
 
         # Storage file path
         storage_file = "src/main/python/uc3m_consulting/" + "all_documents.json"
@@ -217,4 +220,3 @@ class EnterpriseManager:
 
         return str(control_char) == cif[8]
         # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE OTHERWISE
-
