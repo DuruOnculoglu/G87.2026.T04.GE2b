@@ -278,5 +278,125 @@
         "starting_date": "31/12/2026",
         "time_stamp": 1776916891.655778,
         "project_id": "e395b93c38003e8ce4caef8189878e3b"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid text",
+        "project_acronym": "PRO01",
+        "project_budget": 50000.0,
+        "department": "HR",
+        "starting_date": "01/01/2027",
+        "time_stamp": 1767225600.0,
+        "project_id": "27e6024bf39af523a08276bfea060e5b"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid texts",
+        "project_acronym": "890478",
+        "project_budget": 50000.01,
+        "department": "Finance",
+        "starting_date": "23/04/2026",
+        "time_stamp": 1776934819.552173,
+        "project_id": "bce35360f460675a082f217b080d5229"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid textvalid textvalid tex",
+        "project_acronym": "PR0000002",
+        "project_budget": 999999.99,
+        "department": "Legal",
+        "starting_date": "31/12/2027",
+        "time_stamp": 1776934819.553608,
+        "project_id": "8d719e03d89027dd86714fb6bdcee212"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid textvalid textvalid text",
+        "project_acronym": "PRCF538FG0",
+        "project_budget": 1000000.0,
+        "department": "Logistics",
+        "starting_date": "31/12/2026",
+        "time_stamp": 1776934819.554078,
+        "project_id": "516b13627c47570b84a4f8927a6b364a"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid text",
+        "project_acronym": "PRO01",
+        "project_budget": 50000.0,
+        "department": "HR",
+        "starting_date": "01/01/2027",
+        "time_stamp": 1767225600.0,
+        "project_id": "27e6024bf39af523a08276bfea060e5b"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid texts",
+        "project_acronym": "890478",
+        "project_budget": 50000.01,
+        "department": "Finance",
+        "starting_date": "23/04/2026",
+        "time_stamp": 1776935546.714723,
+        "project_id": "e7887d6a59a2db6832f9c99c01c6ddb9"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid textvalid textvalid tex",
+        "project_acronym": "PR0000002",
+        "project_budget": 999999.99,
+        "department": "Legal",
+        "starting_date": "31/12/2027",
+        "time_stamp": 1776935546.718055,
+        "project_id": "ef0ec90d7c5e29fa0465a61cee7bf4b7"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid textvalid textvalid text",
+        "project_acronym": "PRCF538FG0",
+        "project_budget": 1000000.0,
+        "department": "Logistics",
+        "starting_date": "31/12/2026",
+        "time_stamp": 1776935546.718751,
+        "project_id": "df585172425c12be29ab00d6b0097ef7"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid text",
+        "project_acronym": "PRO01",
+        "project_budget": 50000.0,
+        "department": "HR",
+        "starting_date": "01/01/2027",
+        "time_stamp": 1767225600.0,
+        "project_id": "27e6024bf39af523a08276bfea060e5b"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid texts",
+        "project_acronym": "890478",
+        "project_budget": 50000.01,
+        "department": "Finance",
+        "starting_date": "23/04/2026",
+        "time_stamp": 1776936178.951095,
+        "project_id": "844a62dfc9067a5533b5fd0c8c63459f"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid textvalid textvalid tex",
+        "project_acronym": "PR0000002",
+        "project_budget": 999999.99,
+        "department": "Legal",
+        "starting_date": "31/12/2027",
+        "time_stamp": 1776936178.955477,
+        "project_id": "4ecc79bea333e12f3d3fbd7efb5b80ba"
+    },
+    {
+        "company_cif": "A58818501",
+        "project_description": "valid textvalid textvalid text",
+        "project_acronym": "PRCF538FG0",
+        "project_budget": 1000000.0,
+        "department": "Logistics",
+        "starting_date": "31/12/2026",
+        "time_stamp": 1776936178.957014,
+        "project_id": "7d1b4eb8bae42d045c378ede6b9de263"
     }
 ]
